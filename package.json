@@ -1,0 +1,36 @@
+{
+	"name": "grouped-products",
+	"title": "Grouped Products for WooCommerce",
+	"license": "GPL-3.0-or-later",
+	"version": "0.1.0",
+	"description": "Groups products together for display on archive pages.",
+	"scripts": {
+		"build": "wp-scripts build",
+		"check-engines": "wp-scripts check-engines",
+		"check-licenses": "wp-scripts check-licenses",
+		"format:js": "wp-scripts format-js",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:md:js": "wp-scripts lint-md-js",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"packages-update": "wp-scripts packages-update",
+		"start": "wp-scripts start",
+		"test:e2e": "wp-scripts test-e2e",
+		"test:unit": "wp-scripts test-unit-js",
+		"build-zip": "npm run build && mkdir ./rapid-products-woocommerce && cp -r ./rapid-products-woocommerce.php ./rapid-products-woocommerce/rapid-products-woocommerce.php && cp -r ./includes ./rapid-products-woocommerce/includes && cp -r ./build ./rapid-products-woocommerce/build && zip -r ./rapid-products-woocommerce.zip ./rapid-products-woocommerce && rm -r ./rapid-products-woocommerce",
+		"watch": "watch 'npm run build' ./src"
+	},
+	"devDependencies": {
+		"@woocommerce/dependency-extraction-webpack-plugin": "1.6.0",
+		"@woocommerce/eslint-plugin": "^1.1.0",
+		"@wordpress/env": "^5.2.0",
+		"@wordpress/scripts": "^22.3.0"
+	},
+	"dependencies": {
+		"@wordpress/api-fetch": "^6.2.0",
+		"react": "^17.0.2",
+		"react-dom": "^17.0.2",
+		"watch": "^1.0.2"
+	}
+}
