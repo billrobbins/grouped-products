@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 /**
  * Internal dependencies
  */
-import { getCart, getGroup } from './utilities/dataStore';
+import { getCart, getGroups } from './utilities/dataStore';
 import { Group } from './group/group';
 
 export const App = () => {
@@ -14,8 +14,8 @@ export const App = () => {
 	const [groupData, updateGroupData] = useState([]);
 
 	useEffect(() => {
-		const loadGroup = async () => {
-			const response = await getGroup();
+		const loadGroups = async () => {
+			const response = await getGroups();
 			try {
 				updateGroupData(response);
 			} catch (error) {
@@ -38,17 +38,21 @@ export const App = () => {
 				console.log(error);
 			}
 		};
-		loadGroup();
 		const expireNonce =
 			window.localStorage.getItem('wc_nonce_time') + 60 * 60 * 24 * 1000;
 		if (Date.now() > expireNonce) {
 			loadCart();
 		}
+		loadGroups();
 	}, []);
 
 	return (
 		<div className="App">
-			<Group groupData={groupData} />
+			<ul>
+				{groupData.map((group) => (
+					<li key={group.term_id}>{group.type}</li>
+				))}
+			</ul>
 		</div>
 	);
 };

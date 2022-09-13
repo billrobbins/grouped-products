@@ -97,3 +97,24 @@ function remove_product_cat_intro(): void {
 	remove_action( 'woocommerce_after_shop_loop', 'woocommerce_result_count', 20 );
 }
 add_action( 'after_setup_theme', 'remove_product_cat_intro' );
+
+/**
+ * Adds support for the cabinet-type attribute to wc_get_products().
+ *
+ * @param array $query - Args for WP_Query.
+ * @param array $query_vars - Query vars from WC_Product_Query.
+ * @return array modified $query
+ */
+function handle_cabinet_type_attribute_get_products( array $query, array $query_vars ):array {
+	if ( ! empty( $query_vars['cabinet-type'] ) ) {
+		$query['tax_query'][] = array(
+			'taxonomy' => 'pa_cabinet-type',
+			'field'    => 'slug',
+			'terms'    => $query_vars['cabinet-type'],
+			'operator' => 'IN',
+		);
+	}
+
+	return $query;
+}
+add_filter( 'woocommerce_product_data_store_cpt_get_products_query', 'handle_cabinet_type_attribute_get_products', 10, 2 );
