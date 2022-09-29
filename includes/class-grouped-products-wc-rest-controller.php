@@ -24,7 +24,6 @@ class Grouped_Products_WC_REST_Controller {
 	 * @return void
 	 */
 	public function register_routes() {
-
 		register_rest_route(
 			$this->namespace,
 			'/group',
@@ -70,6 +69,7 @@ class Grouped_Products_WC_REST_Controller {
 				'type'          => $product->get_attribute( 'cabinet-type' ),
 				'width'         => $product->get_attribute( 'width' ),
 				'height'        => $product->get_attribute( 'height' ),
+				'length'        => $product->get_attribute( 'length' ),
 			);
 		}
 		return array(
@@ -93,7 +93,7 @@ class Grouped_Products_WC_REST_Controller {
 		$groups    = array();
 
 		if ( $transient ) {
-		//	return $transient;
+			return $transient;
 		}
 
 		$terms = get_terms(
@@ -110,35 +110,6 @@ class Grouped_Products_WC_REST_Controller {
 		set_transient( "grouped_products_${cat}", $groups, 30 * DAY_IN_SECONDS );
 
 		return new WP_REST_Response( $groups );
-
-	}
-
-	/**
-	 * Sets up the proper HTTP status code for authorization.
-	 *
-	 * @return HTTP status code
-	 */
-	public function authorization_status_code() {
-
-		$status = 401;
-
-		if ( is_user_logged_in() ) {
-			$status = 403;
-		}
-
-		return $status;
-	}
-
-	/**
-	 * Check permissions for the options.
-	 *
-	 * @return boolean for permissions
-	 */
-	public function get_options_permissions_check() {
-		// if ( ! current_user_can( 'read' ) ) {
-		// 	return new WP_Error( 'rest_forbidden', esc_html__( 'You cannot view these.  Sorry!' ), array( 'status' => $this->authorization_status_code() ) );
-		// }
-		return true;
 	}
 }
 
