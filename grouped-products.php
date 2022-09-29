@@ -17,14 +17,13 @@ require_once plugin_dir_path( __FILE__ ) . '/includes/class-grouped-products-wc-
 
 /**
  * Register and enqueue JS and CSS
- * 
+ *
  * @return void
  */
 function grouped_products_load_scripts(): void {
 
-	// Todo: only load these on product category archives.
-	if ( isset( $_GET['page'] ) && ! empty( $_GET['page'] ) && 'rapid-products' !== $_GET['page'] ) {
-	//	return;
+	if ( ! is_product_category() ) {
+		return;
 	}
 
 	$script_path       = '/build/index.js';
