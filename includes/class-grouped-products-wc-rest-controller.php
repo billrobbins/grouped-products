@@ -67,9 +67,9 @@ class Grouped_Products_WC_REST_Controller {
 				'image'         => $image_url,
 				'sku'           => $product->get_sku(),
 				'type'          => $product->get_attribute( 'cabinet-type' ),
-				'width'         => $product->get_attribute( 'width' ),
-				'height'        => $product->get_attribute( 'height' ),
-				'length'        => $product->get_attribute( 'length' ),
+				'width'         => $product->get_width(),
+				'height'        => $product->get_height(),
+				'length'        => $product->get_length(),
 			);
 		}
 		return array(
@@ -93,7 +93,7 @@ class Grouped_Products_WC_REST_Controller {
 		$groups    = array();
 
 		if ( $transient ) {
-			return $transient;
+		//	return $transient;
 		}
 
 		$terms = get_terms(

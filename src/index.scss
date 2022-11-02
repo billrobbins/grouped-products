@@ -1,10 +1,208 @@
-ul.product-grid {
-	display: grid;
-	grid-template-columns: 33% 33% 33%;
-	list-style-type: none;
-	gap: 25px;
-}
-  
-li.product {
+// .product-group {
+// 	display: block;
+// 	overflow: hidden;
+// 	margin-bottom: 50px;
+// 	border-bottom: 1px solid #ccc;
 
+// 	.group-image {
+// 		float: left;
+// 		width: 80px;
+// 		margin-right: 5%;
+// 		text-align: center;
+// 		max-height: 300px;
+// 	}
+
+// 	.data-column {
+// 		float: right;
+// 		width: 65%;
+// 		padding: 10px;
+// 	}
+
+// 	.attribute-type {
+// 		float: left;
+// 		width: 15%;
+// 		margin-right: 5%;
+// 	}
+
+// 	.attribute-list {
+// 		float: right;
+// 		width: 80%;
+// 		margin-bottom: 15px;
+// 	}
+
+// 	.attribute-row {
+// 		overflow: hidden;
+// 	}
+
+// }
+@media only screen and (min-width: 1024px) {
+	.tax-product_cat .aligncenter {
+		max-width: 90%;
+	}
+}
+
+/* Grid generator https://grid.layoutit.com/?id=RN6iNHe */
+.product-group .group-data button {
+    padding: 5px 10px;
+    margin: 0;
+    background-color: transparent;
+    background-image: none;
+    border: 0;
+    cursor: pointer;
+    line-height: 1.1;
+    color: #000;
+    opacity: 1;
+    position: relative;
+    text-transform: uppercase;
+    text-align: center;
+    white-space: normal;
+}
+
+/* CSS Grid */
+.product-group {  display: grid;
+	grid-template-columns: 80px 65% 1fr;
+	grid-template-rows: 1fr;
+	gap: 20px 20px;
+	grid-auto-flow: row;
+	grid-template-areas:
+	  "image-holder group-data group-actions";
+	border-bottom: 1px solid #ccc;
+  }
+  
+  .image-holder {  display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	justify-content: center;
+	align-content: center;
+	justify-items: center;
+	align-items: center;
+	grid-template-areas:
+	  "image";
+	grid-area: image-holder;
+  }
+  
+  .image {
+	justify-self: center;
+	align-self: center;
+	grid-area: image;
+  }
+  
+  .group-data {  display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+	  "group-title"
+	  "width"
+	  "height";
+	grid-area: group-data;
+  }
+  
+  .group-title {  display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	justify-items: start;
+	grid-template-areas:
+	  ".";
+	grid-area: group-title;
+  }
+  
+  .width {  display: grid;
+	grid-template-columns: 100px auto;
+	grid-template-rows: 1fr;
+	gap: 0px 10px;
+	grid-auto-flow: row;
+	justify-items: start;
+	align-items: center;
+	grid-template-areas:
+	  "width-name widths";
+	grid-area: width;
+  }
+  
+  .width-name {
+	justify-self: start;
+	align-self: center;
+	grid-area: width-name;
+  }
+  
+  .widths {
+	justify-self: start;
+	align-self: center;
+	grid-area: widths;
+  }
+  
+  .height {  display: grid;
+	grid-template-columns: 100px auto;
+	grid-template-rows: 1fr;
+	gap: 0px 10px;
+	grid-auto-flow: row;
+	grid-template-areas:
+	  "height-name heights";
+	grid-area: height;
+  }
+  
+  .height-name {
+	justify-self: start;
+	align-self: center;
+	grid-area: height-name;
+  }
+  
+  .heights {
+	justify-self: start;
+	align-self: center;
+	grid-area: heights;
+  }
+  
+  .group-actions {  display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: auto 1fr 1fr;
+	gap: 0px 0px;
+	grid-auto-flow: row;
+	grid-template-areas:
+	  "price"
+	  "quantity"
+	  "add-to-cart";
+	grid-area: group-actions;
+  }
+  
+  .price {
+	justify-self: end;
+	align-self: center;
+	grid-area: price;
+  }
+  
+  .quantity {
+	justify-self: end;
+	align-self: center;
+	grid-area: quantity;
+  }
+  
+  .add-to-cart {
+	justify-self: end;
+	align-self: center;
+	grid-area: add-to-cart;
+  }
+  
+  /* Custom Styles */ 
+  .product-group input[type="radio"] {
+	display: none;
+  }  
+      
+  .product-group label {
+	display: inline-block;
+	padding: 4px 11px;
+	cursor: pointer;
+  }    
+
+  .product-group input[type="radio"]:checked+label {
+	background-color: #d1d1d1;
+  }
+
+  .product-group p {
+	margin-bottom: 0;
   }

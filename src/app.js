@@ -39,7 +39,7 @@ export const App = () => {
 			}
 		};
 		const expireNonce =
-			window.localStorage.getItem('wc_nonce_time') + 60 * 60 * 24 * 1000;
+			window.localStorage.getItem('wc_nonce_time') + 86400000;
 		if (Date.now() > expireNonce) {
 			loadCart();
 		}
@@ -48,11 +48,9 @@ export const App = () => {
 
 	return (
 		<div className="App">
-			<ul>
-				{groupData.map((group) => (
-					<li key={group.term_id}>{group.type}</li>
-				))}
-			</ul>
+			{groupData.map((group) => (
+				<Group key={group.term_id} group={group} />
+			))}
 		</div>
 	);
 };
