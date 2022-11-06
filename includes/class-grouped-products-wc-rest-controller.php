@@ -78,7 +78,7 @@ class Grouped_Products_WC_REST_Controller {
 			'term_id'  => $term->term_id,
 			'heights'  => array_unique( array_column( $results, 'height' ) ),
 			'widths'   => array_unique( array_column( $results, 'width' ) ),
-			'lenghts'  => array_unique( array_column( $results, 'length' ) ),
+			'lengths'  => array_unique( array_column( $results, 'length' ) ),
 			'products' => $results,
 		);
 	}
