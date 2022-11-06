@@ -60,7 +60,7 @@
 
 /* CSS Grid */
 .product-group {  display: grid;
-	grid-template-columns: 80px 65% 1fr;
+	grid-template-columns: 100px 65% 1fr;
 	grid-template-rows: 1fr;
 	gap: 20px 20px;
 	grid-auto-flow: row;
@@ -71,7 +71,7 @@
   
   .image-holder {  display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr;
+	grid-template-rows: auto;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	justify-content: center;
@@ -91,7 +91,7 @@
   
   .group-data {  display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr 1fr;
+	grid-template-rows: auto auto auto;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	grid-template-areas:
@@ -103,7 +103,7 @@
   
   .group-title {  display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: 1fr;
+	grid-template-rows: auto;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	justify-items: start;
@@ -114,7 +114,7 @@
   
   .width {  display: grid;
 	grid-template-columns: 100px auto;
-	grid-template-rows: 1fr;
+	grid-template-rows: auto;
 	gap: 0px 10px;
 	grid-auto-flow: row;
 	justify-items: start;
@@ -138,7 +138,7 @@
   
   .height {  display: grid;
 	grid-template-columns: 100px auto;
-	grid-template-rows: 1fr;
+	grid-template-rows: auto;
 	gap: 0px 10px;
 	grid-auto-flow: row;
 	grid-template-areas:
@@ -160,7 +160,7 @@
   
   .group-actions {  display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr 1fr;
+	grid-template-rows: auto auto auto;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	grid-template-areas:
@@ -199,10 +199,23 @@
 	cursor: pointer;
   }    
 
-  .product-group input[type="radio"]:checked+label {
+  .product-group input[type="radio"]:checked + label {
 	background-color: #d1d1d1;
   }
 
   .product-group p {
 	margin-bottom: 0;
+  }
+
+  .product-group .group-data h2,
+  .product-group .group-data ul {
+	margin: 0;
+  }
+
+  .product-group .group-data li {
+	display: inline-block;
+  }
+
+  .woocommerce .product-group .loading button.button {
+	background-color: #ccc;
   }
