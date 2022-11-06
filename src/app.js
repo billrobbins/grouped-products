@@ -38,11 +38,12 @@ export const App = () => {
 				console.log(error);
 			}
 		};
-		const expireNonce =
-			window.localStorage.getItem('wc_nonce_time') + 86400000;
-		if (Date.now() > expireNonce) {
-			loadCart();
-		}
+		// const expireNonce =
+		// 	window.localStorage.getItem('wc_nonce_time') + 86400000;
+		// if (Date.now() > expireNonce) {
+		// 	loadCart();
+		// }
+		loadCart();
 		loadGroups();
 	}, []);
 
