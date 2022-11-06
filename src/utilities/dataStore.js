@@ -25,14 +25,14 @@ const getCart = async () => {
 	return cart;
 };
 
-const addToCart = (id) => {
+const addToCart = (id, quantity) => {
 	const nonce = window.localStorage.getItem('wc_nonce');
 	return apiFetch({
 		path: `wc/store/v1/cart/add-item`,
 		method: 'POST',
 		data: {
 			id,
-			quantity: 1,
+			quantity,
 		},
 		headers: {
 			nonce,
