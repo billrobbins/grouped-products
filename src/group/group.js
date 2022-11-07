@@ -10,8 +10,7 @@ import { AddToCartButton } from './addToCartButton';
 import { Attribute } from './groupAttribute';
 import { Select } from './select';
 
-// Filter list of sizes to remove duplicates.  When width is selected, use it to filter matching heights.
-// Then once height is selected, pass ID that matches height + width to the cart.
+// Todo: display error messages to customers.  Prompt to select height and width.
 export const Group = (props) => {
 	const [selectedWidth, setSelectedWidth] = useState(null);
 	const [selectedHeight, setSelectedHeight] = useState(null);
@@ -21,7 +20,10 @@ export const Group = (props) => {
 
 	const group = props.group;
 
-	// determine id from height and width combination.  Then add to cart.
+	/**
+	 * Fired by clicking the add to cart button.  It sets the loading state, sends the product id and quantity to the cart, removes the loading state and triggers a refresh of the mini cart.
+	 * It needs to give user feedback on errors like not picking width/height and so on.
+	 */
 	const getSelectedProduct = async () => {
 		setLoading('loading');
 		await addToCart(selectedProduct.id, quantity);
@@ -29,7 +31,9 @@ export const Group = (props) => {
 		jQuery(document.body).trigger('wc_fragment_refresh');
 	};
 
+	// Monitors for selection of the height/width to determine the product ID.
 	useEffect(() => {
+		// Determines the product id from the selected height and width
 		if (selectedHeight !== null && selectedWidth !== null) {
 			const productToAdd = group.products.filter(
 				(product) =>
@@ -57,7 +61,10 @@ export const Group = (props) => {
 			</div>
 			<div className="group-data">
 				<div className="group-title">
-					<h2 className="group-type">{group.type}</h2>
+					<h4 className="group-type">{group.type}</h4>
+					<p className="product-details">
+						{selectedProduct !== 0 ? selectedProduct.name : ''}
+					</p>
 				</div>
 				<Attribute
 					slug="width"
