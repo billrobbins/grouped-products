@@ -5,16 +5,16 @@ export const Attribute = (props) => {
 				<p>{props.title}:</p>
 			</div>
 			<ul className={props.slug + 's'}>
-				{props.items.map((width) => (
-					<li key={width}>
+				{props.items.map((item) => (
+					<li key={item}>
 						<input
 							type="radio"
-							value={width}
-							name="width"
-							id={width}
+							value={item}
+							name={props.slug}
+							id={item}
 							onClick={(e) => props.action(e.target.value)}
 						/>
-						<label htmlFor={width}>{width}</label>
+						<label htmlFor={item}>{item}</label>
 					</li>
 				))}
 			</ul>
