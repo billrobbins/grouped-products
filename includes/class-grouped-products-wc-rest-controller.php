@@ -72,13 +72,31 @@ class Grouped_Products_WC_REST_Controller {
 				'length'        => $product->get_length(),
 			);
 		}
+		$widths =
+			array_values(
+				array_unique(
+					array_column( $results, 'width' )
+				)
+			);
+		sort( $widths );
+		$heights =
+			array_values(
+				array_unique(
+					array_column( $results, 'height' )
+				)
+			);
+		sort( $heights );
 		return array(
 			'type'     => $term->name,
 			'slug'     => $term->slug,
 			'term_id'  => $term->term_id,
-			'heights'  => array_unique( array_column( $results, 'height' ) ),
-			'widths'   => array_unique( array_column( $results, 'width' ) ),
-			'lengths'  => array_unique( array_column( $results, 'length' ) ),
+			'heights'  => $heights,
+			'widths'   => $widths,
+			'lengths'  => array_values(
+				array_unique(
+					array_column( $results, 'length' )
+				)
+			),
 			'products' => $results,
 		);
 	}
@@ -96,7 +114,7 @@ class Grouped_Products_WC_REST_Controller {
 		$groups    = array();
 
 		if ( $transient ) {
-			return $transient;
+			// return $transient;
 		}
 
 		$terms = get_terms(
