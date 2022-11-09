@@ -1,3 +1,4 @@
+// Todo: set "checked" value and have it clear upon adding to cart.
 export const Attribute = (props) => {
 	return (
 		<div className={props.slug}>
@@ -11,10 +12,12 @@ export const Attribute = (props) => {
 							type="radio"
 							value={item}
 							name={props.slug}
-							id={item}
+							id={props.group + props.slug + item}
 							onClick={(e) => props.action(e.target.value)}
 						/>
-						<label htmlFor={item}>{item}</label>
+						<label htmlFor={props.group + props.slug + item}>
+							{item}
+						</label>
 					</li>
 				))}
 			</ul>

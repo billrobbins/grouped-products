@@ -17,6 +17,8 @@ export const Group = (props) => {
 	const [selectedProduct, setSelectedProduct] = useState(0);
 	const [quantity, setQuantity] = useState(1);
 	const [loading, setLoading] = useState('');
+	const [availableHeights, setAvailableHeights] = useState([]);
+	const [availableWidths, setAvailableWidths] = useState([]);
 
 	const group = props.group;
 
@@ -29,10 +31,35 @@ export const Group = (props) => {
 		await addToCart(selectedProduct.id, quantity);
 		setLoading('');
 		jQuery(document.body).trigger('wc_fragment_refresh');
+		setSelectedProduct(0);
+		setSelectedWidth(null);
+		setSelectedHeight(null);
 	};
+
+	const getProductImage = () => {
+		if (selectedProduct !== 0) {
+			if (typeof selectedProduct.image !== 'undefined') {
+				return selectedProduct.image;
+			}
+		}
+		return group.products[0].image;
+	};
+
+	useEffect(() => {
+		setAvailableWidths(group.widths);
+		setAvailableHeights(group.heights);
+	}, [group.widths, group.heights]);
 
 	// Monitors for selection of the height/width to determine the product ID.
 	useEffect(() => {
+		// Takes selected width and filters lists of heights for only possible combinations.
+		if (selectedWidth !== null) {
+			const available = group.products.filter(
+				(product) => product.width === selectedWidth
+			);
+			const unique = [...new Set(available.map((item) => item.height))];
+			setAvailableHeights(unique);
+		}
 		// Determines the product id from the selected height and width
 		if (selectedHeight !== null && selectedWidth !== null) {
 			const productToAdd = group.products.filter(
@@ -49,11 +76,7 @@ export const Group = (props) => {
 			<div className="image-holder">
 				<div className="image">
 					<img
-						src={
-							selectedProduct !== 0
-								? selectedProduct.image
-								: group.products[0].image
-						}
+						src={getProductImage()}
 						alt={group.type}
 						loading="lazy"
 					/>
@@ -67,15 +90,17 @@ export const Group = (props) => {
 					</p>
 				</div>
 				<Attribute
+					group={group.slug}
 					slug="width"
 					title="Width"
-					items={group.widths}
+					items={availableWidths}
 					action={setSelectedWidth}
 				/>
 				<Attribute
+					group={group.slug}
 					slug="height"
 					title="Height"
-					items={group.heights}
+					items={availableHeights}
 					action={setSelectedHeight}
 				/>
 			</div>
