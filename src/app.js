@@ -8,10 +8,12 @@ import { useState, useEffect } from 'react';
  */
 import { getCart, getGroups } from './utilities/dataStore';
 import { Group } from './group/group';
+import { Notification } from './notifications/notification';
 
 export const App = () => {
 	const [cart, updateCart] = useState();
 	const [groupData, updateGroupData] = useState([]);
+	const [message, setMessage] = useState('');
 
 	useEffect(() => {
 		const loadGroups = async () => {
@@ -49,8 +51,13 @@ export const App = () => {
 
 	return (
 		<div className="App">
+			{message && <Notification message={message} />}
 			{groupData.map((group) => (
-				<Group key={group.term_id} group={group} />
+				<Group
+					key={group.term_id}
+					group={group}
+					setMessage={setMessage}
+				/>
 			))}
 		</div>
 	);
