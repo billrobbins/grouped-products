@@ -14,7 +14,7 @@ export const Attribute = (props) => {
 							name={props.slug}
 							id={props.group + props.slug + item}
 							checked={item === props.selected}
-							onClick={(e) => props.action(e.target.value)}
+							onChange={(e) => props.action(e.target.value)}
 						/>
 						<label htmlFor={props.group + props.slug + item}>
 							{item}

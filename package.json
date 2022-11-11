@@ -31,6 +31,7 @@
 		"@wordpress/api-fetch": "^6.2.0",
 		"react": "^17.0.2",
 		"react-dom": "^17.0.2",
+		"transition-hook": "^1.5.2",
 		"watch": "^1.0.2"
 	}
 }

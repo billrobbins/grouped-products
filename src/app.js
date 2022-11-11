@@ -14,6 +14,7 @@ export const App = () => {
 	const [cart, updateCart] = useState();
 	const [groupData, updateGroupData] = useState([]);
 	const [message, setMessage] = useState('');
+	const [showNotify, setShowNotify] = useState(false);
 
 	useEffect(() => {
 		const loadGroups = async () => {
@@ -51,12 +52,13 @@ export const App = () => {
 
 	return (
 		<div className="App">
-			{message && <Notification message={message} />}
+			<Notification message={message} showNotify={showNotify} />
 			{groupData.map((group) => (
 				<Group
 					key={group.term_id}
 					group={group}
 					setMessage={setMessage}
+					setShowNotify={setShowNotify}
 				/>
 			))}
 		</div>

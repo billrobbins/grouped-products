@@ -22,6 +22,7 @@ export const Group = (props) => {
 
 	const group = props.group;
 	const setMessage = props.setMessage;
+	const setShowNotify = props.setShowNotify;
 
 	/**
 	 * Fired by clicking the add to cart button.  It sets the loading state, sends the product id and quantity to the cart, removes the loading state and triggers a refresh of the mini cart.
@@ -29,20 +30,19 @@ export const Group = (props) => {
 	 */
 	const getSelectedProduct = async () => {
 		if (typeof selectedProduct.id === 'undefined') {
-			props.setMessage('Please select a width and height');
+			setMessage('Please select a width and height');
 			return;
 		}
 		setLoading('loading');
 		await addToCart(selectedProduct.id, quantity);
-		props.setMessage(selectedProduct.name + ' added to cart');
-		setTimeout(() => {
-			props.setMessage('');
-		}, 3000);
+		setShowNotify(true);
+		setMessage('Added ' + selectedProduct.name);
 		setLoading('');
 		jQuery(document.body).trigger('wc_fragment_refresh');
-		setSelectedProduct(0);
-		setSelectedWidth(null);
-		setSelectedHeight(null);
+		clearSelection();
+		setTimeout(() => {
+			setShowNotify(false);
+		}, 2500);
 	};
 
 	const getProductImage = () => {
@@ -92,17 +92,28 @@ export const Group = (props) => {
 					product.width === selectedWidth
 			);
 			if (productToAdd.length > 0) {
+				setShowNotify(false);
 				setSelectedProduct(productToAdd[0], quantity);
 			} else {
-				setMessage('Please select a width and height');
-				setSelectedWidth(null);
-				setSelectedHeight(null);
+				// This indicates that the width and height combination doesn't exit.
+				setShowNotify(true);
+				setMessage(
+					"Sorry, this combination does't exit. \nPlease select again."
+				);
+				clearSelection();
+				setTimeout(() => {
+					setShowNotify(false);
+				}, 3500);
 			}
 		}
 	}, [selectedWidth, selectedHeight, group.products, quantity, setMessage]);
 
 	const Clear = () => {
-		return <button onClick={clearSelection}>Clear</button>;
+		return (
+			<button className="clear-button" onClick={clearSelection}>
+				Clear
+			</button>
+		);
 	};
 
 	return (
@@ -119,9 +130,6 @@ export const Group = (props) => {
 			<div className="group-data">
 				<div className="group-title">
 					<h4 className="group-type">{group.type}</h4>
-					<p className="product-details">
-						{selectedProduct !== 0 && <Clear />}
-					</p>
 				</div>
 				<Attribute
 					group={group.slug}
@@ -149,6 +157,7 @@ export const Group = (props) => {
 					</h4>
 				</div>
 				<div className="quantity">
+					{selectedProduct !== 0 && <Clear />}
 					<Select quantity={quantity} setQuantity={setQuantity} />
 				</div>
 				<AddToCartButton
