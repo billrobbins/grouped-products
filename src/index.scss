@@ -1,72 +1,18 @@
-// .product-group {
-// 	display: block;
-// 	overflow: hidden;
-// 	margin-bottom: 50px;
-// 	border-bottom: 1px solid #ccc;
 
-// 	.group-image {
-// 		float: left;
-// 		width: 80px;
-// 		margin-right: 5%;
-// 		text-align: center;
-// 		max-height: 300px;
-// 	}
-
-// 	.data-column {
-// 		float: right;
-// 		width: 65%;
-// 		padding: 10px;
-// 	}
-
-// 	.attribute-type {
-// 		float: left;
-// 		width: 15%;
-// 		margin-right: 5%;
-// 	}
-
-// 	.attribute-list {
-// 		float: right;
-// 		width: 80%;
-// 		margin-bottom: 15px;
-// 	}
-
-// 	.attribute-row {
-// 		overflow: hidden;
-// 	}
-
-// }
 @media only screen and (min-width: 1024px) {
 	.tax-product_cat .aligncenter {
-		max-width: 90%;
+		width: 90%;
+		max-width: 1200px;
 	}
 }
 
-/* Grid generator https://grid.layoutit.com/?id=RN6iNHe */
-.product-group .group-data button {
-    padding: 5px 10px;
-    margin: 0;
-    background-color: transparent;
-    background-image: none;
-    border: 0;
-    cursor: pointer;
-    line-height: 1.1;
-    color: #000;
-    opacity: 1;
-    position: relative;
-    text-transform: uppercase;
-    text-align: center;
-    white-space: normal;
-}
-
-/* CSS Grid */
 .product-group {  display: grid;
-	grid-template-columns: 100px 65% 1fr;
-	grid-template-rows: 1fr;
+	grid-template-columns: 140px 50% 1fr;
+	grid-template-rows: auto;
 	gap: 20px 20px;
 	grid-auto-flow: row;
 	grid-template-areas:
 	  "image-holder group-data group-actions";
-	border-bottom: 1px solid #ccc;
   }
   
   .image-holder {  display: grid;
@@ -91,7 +37,7 @@
   
   .group-data {  display: grid;
 	grid-template-columns: 1fr;
-	grid-template-rows: auto auto auto;
+	grid-template-rows: auto 1fr 1fr;
 	gap: 0px 0px;
 	grid-auto-flow: row;
 	grid-template-areas:
@@ -113,7 +59,7 @@
   }
   
   .width {  display: grid;
-	grid-template-columns: 100px auto;
+	grid-template-columns: 60px auto;
 	grid-template-rows: auto;
 	gap: 0px 10px;
 	grid-auto-flow: row;
@@ -137,7 +83,7 @@
   }
   
   .height {  display: grid;
-	grid-template-columns: 100px auto;
+	grid-template-columns: 60px auto;
 	grid-template-rows: auto;
 	gap: 0px 10px;
 	grid-auto-flow: row;
@@ -188,19 +134,26 @@
 	grid-area: add-to-cart;
   }
   
+  
   /* Custom Styles */ 
+  .product-group {
+	border-bottom: solid 2px #000;
+	margin-bottom: 2rem;
+	padding-bottom: 2rem;
+  }
   .product-group input[type="radio"] {
 	display: none;
   }  
       
   .product-group label {
 	display: inline-block;
-	padding: 4px 11px;
+	padding: 10px;
 	cursor: pointer;
   }    
 
   .product-group input[type="radio"]:checked + label {
-	background-color: #d1d1d1;
+	color: #fff;
+	background-color: #000;
   }
 
   .product-group p {
@@ -214,8 +167,71 @@
 
   .product-group .group-data li {
 	display: inline-block;
+	padding-bottom: 0;
   }
 
   .woocommerce .product-group .loading button.button {
 	background-color: #ccc;
+  }
+
+  .woocommerce .product-group button.clear-button {
+	background-color: transparent;
+	color: #000;
+	border: 2px solid #000;
+	margin: 0 20px 0 0;
+	display: inline-block;
+
+    border-radius: 4px;
+    font-family: var(--global--font-primary);
+    font-size: 1rem;
+    font-weight: var(--global--headings-font-weight);
+    line-height: 1.5;
+    padding: 0.7rem 1rem;
+  }
+
+  .woocommerce .product-group button.clear-button::after {
+	content: '';
+	display: none;
+  }
+
+  .product-group .selected-product {
+	font-size: 14px;
+	font-weight: 400;
+  }
+
+  .product-group .type-title {
+	position: relative;
+	top: 4px;
+  }
+
+  .product-group h4 {
+	margin: 0;
+  }
+
+  .product-group select {
+	display: inline-block;
+	width: 100px;
+    padding: 0.8rem 1rem;
+  }
+
+  .category-notification {
+	background-color: #000;
+	border-radius: 4px;
+	color: #fff;
+	position: fixed;
+	width: 400px;
+	max-width: 100%;
+	right: 50px;
+	top: 50px;
+	z-index: 2000;
+  }
+
+  .category-notification p {
+	margin-bottom: 0;
+	padding: 1rem;
+	white-space: pre-wrap;
+  }
+
+  .add-to-cart .group-cart.button {
+    padding: 1rem 2rem;
   }
