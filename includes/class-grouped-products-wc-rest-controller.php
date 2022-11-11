@@ -109,13 +109,18 @@ class Grouped_Products_WC_REST_Controller {
 	 */
 	public function load_fields( $request ) {
 
-		$cat       = $request->get_param( 'cat' );
-		$transient = get_transient( "grouped_products_{$cat}" );
-		$groups    = array();
+		$cat = $request->get_param( 'cat' );
 
-		if ( $transient ) {
-			// return $transient;
-		}
+		// Currently transients and caching are disabled in favor of the WP REST API Cache plugin.
+		// $transient = get_transient( "grouped_products_{$cat}" );
+
+		// if ( $transient ) {
+		// return new WP_REST_Response( $transient );
+		// }
+
+		// if ( true === $cached ) {
+		// return new WP_REST_Response( $cached );
+		// }
 
 		$terms = get_terms(
 			array(
@@ -124,11 +129,12 @@ class Grouped_Products_WC_REST_Controller {
 			)
 		);
 
+		$groups = array();
 		foreach ( $terms as $term ) {
 			$groups[] = $this->get_products_in_groups( $cat, $term );
 		}
 
-		set_transient( "grouped_products_${cat}", $groups, 30 * DAY_IN_SECONDS );
+		// set_transient( "grouped_products_${cat}", $groups, 30 * DAY_IN_SECONDS );
 
 		return new WP_REST_Response( $groups );
 	}

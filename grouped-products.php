@@ -64,7 +64,7 @@ add_action( 'wp_enqueue_scripts', 'grouped_products_load_scripts' );
  */
 function ijab_product_cat_react_hook(): void {
 	if ( is_product_category() ) {
-		echo '<div class="product-cat-react-hook"></div>';
+		echo '<div class="product-cat-react-hook">Loading...</div>';
 	}
 }
 add_action( 'woocommerce_before_shop_loop', 'ijab_product_cat_react_hook' );
@@ -117,3 +117,17 @@ function handle_cabinet_type_attribute_get_products( array $query, array $query_
 	return $query;
 }
 add_filter( 'woocommerce_product_data_store_cpt_get_products_query', 'handle_cabinet_type_attribute_get_products', 10, 2 );
+
+
+/**
+ * Register the /wp-json/acf/v3/posts endpoint so it will be cached.
+ *
+ * @param array $allowed_endpoints.
+ */
+function grouped_products_add_rest_cache( $allowed_endpoints ) {
+
+	$allowed_endpoints['grouped-products/v1'][] = 'group';
+
+	return $allowed_endpoints;
+}
+add_filter( 'wp_rest_cache/allowed_endpoints', 'grouped_products_add_rest_cache', 10, 1 );
