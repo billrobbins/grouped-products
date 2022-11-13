@@ -15,6 +15,10 @@
 // Load REST Endpoint for Options.
 require_once plugin_dir_path( __FILE__ ) . '/includes/class-grouped-products-wc-rest-controller.php';
 
+// These can be used to update product dimensions based on the product name.
+// require_once plugin_dir_path( __FILE__ ) . '/includes/dimensions.php';
+// Class_Update_Product_Dimensions_By_Title::update_dimensions( 'ice-white-shaker' );
+
 /**
  * Register and enqueue JS and CSS
  *
