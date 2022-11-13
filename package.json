@@ -18,7 +18,7 @@
 		"start": "wp-scripts start",
 		"test:e2e": "wp-scripts test-e2e",
 		"test:unit": "wp-scripts test-unit-js",
-		"build-zip": "npm run build && mkdir ./rapid-products-woocommerce && cp -r ./rapid-products-woocommerce.php ./rapid-products-woocommerce/rapid-products-woocommerce.php && cp -r ./includes ./rapid-products-woocommerce/includes && cp -r ./build ./rapid-products-woocommerce/build && zip -r ./rapid-products-woocommerce.zip ./rapid-products-woocommerce && rm -r ./rapid-products-woocommerce",
+		"build-zip": "npm run build && mkdir ./grouped-products && cp -r ./grouped-products.php ./grouped-products/grouped-products.php && cp -r ./includes ./grouped-products/includes && cp -r ./build ./grouped-products/build && zip -r ./grouped-products.zip ./grouped-products && rm -r ./grouped-products",
 		"watch": "watch 'npm run build' ./src"
 	},
 	"devDependencies": {
