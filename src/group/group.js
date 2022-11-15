@@ -138,7 +138,11 @@ export const Group = (props) => {
 	};
 
 	const ProductDetails = () => {
-		return <span className="product-details">{selectedProduct.name}</span>;
+		return (
+			<div className="product-details">
+				{selectedProduct.sku} - {selectedProduct.name}
+			</div>
+		);
 	};
 
 	return (

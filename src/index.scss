@@ -238,7 +238,11 @@
 
   .product-group span.sale-price {
     font-weight: 200;
-    color: var(--global--body-color-2-xlight);
+    color: #ccc;
     text-decoration: line-through;
     margin-right: 20px;
+}
+
+.product-details {
+	font-size: 14px;
 }
