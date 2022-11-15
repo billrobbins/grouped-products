@@ -235,3 +235,10 @@
   .add-to-cart .group-cart.button {
     padding: 1rem 2rem;
   }
+
+  .product-group span.sale-price {
+    font-weight: 200;
+    color: var(--global--body-color-2-xlight);
+    text-decoration: line-through;
+    margin-right: 20px;
+}

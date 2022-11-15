@@ -106,7 +106,14 @@ export const Group = (props) => {
 				}, 3500);
 			}
 		}
-	}, [selectedWidth, selectedHeight, group.products, quantity, setMessage]);
+	}, [
+		selectedWidth,
+		selectedHeight,
+		group.products,
+		quantity,
+		setMessage,
+		setShowNotify,
+	]);
 
 	const Clear = () => {
 		return (
@@ -114,6 +121,24 @@ export const Group = (props) => {
 				Clear
 			</button>
 		);
+	};
+
+	const Price = () => {
+		if (selectedProduct !== 0) {
+			return (
+				<h4>
+					<span className="sale-price">
+						${selectedProduct.regular_price}
+					</span>
+					${selectedProduct.price}
+				</h4>
+			);
+		}
+		return <h4>From ${group.products[0].price}</h4>;
+	};
+
+	const ProductDetails = () => {
+		return <span className="product-details">{selectedProduct.name}</span>;
 	};
 
 	return (
@@ -130,31 +155,32 @@ export const Group = (props) => {
 			<div className="group-data">
 				<div className="group-title">
 					<h4 className="group-type">{group.type}</h4>
+					{selectedProduct !== 0 && <ProductDetails />}
 				</div>
-				<Attribute
-					group={group.slug}
-					slug="width"
-					title="Width"
-					selected={selectedWidth}
-					items={availableWidths}
-					action={setSelectedWidth}
-				/>
-				<Attribute
-					group={group.slug}
-					slug="height"
-					title="Height"
-					selected={selectedHeight}
-					items={availableHeights}
-					action={setSelectedHeight}
-				/>
+				{availableWidths && (
+					<Attribute
+						group={group.slug}
+						slug="width"
+						title="Width"
+						selected={group.slug + selectedWidth}
+						items={availableWidths}
+						action={setSelectedWidth}
+					/>
+				)}
+				{availableHeights && (
+					<Attribute
+						group={group.slug}
+						slug="height"
+						title="Height"
+						selected={group.slug + selectedHeight}
+						items={availableHeights}
+						action={setSelectedHeight}
+					/>
+				)}
 			</div>
 			<div className="group-actions">
 				<div className="price">
-					<h4>
-						{selectedProduct !== 0
-							? '$' + selectedProduct.price
-							: 'From $' + group.products[0].price}
-					</h4>
+					<Price />
 				</div>
 				<div className="quantity">
 					{selectedProduct !== 0 && <Clear />}

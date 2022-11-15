@@ -86,17 +86,19 @@ class Grouped_Products_WC_REST_Controller {
 				)
 			);
 		sort( $heights );
+		$lengths = array_values(
+			array_unique(
+				array_column( $results, 'length' )
+			)
+		);
+		sort( $lengths );
 		return array(
 			'type'     => $term->name,
 			'slug'     => $term->slug,
 			'term_id'  => $term->term_id,
 			'heights'  => $heights,
 			'widths'   => $widths,
-			'lengths'  => array_values(
-				array_unique(
-					array_column( $results, 'length' )
-				)
-			),
+			'lengths'  => $lengths,
 			'products' => $results,
 		);
 	}
