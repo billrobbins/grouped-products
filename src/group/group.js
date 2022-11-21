@@ -139,62 +139,50 @@ export const Group = (props) => {
 
 	const ProductDetails = () => {
 		return (
-			<div className="product-details">
+			<span className="product-details">
 				{selectedProduct.sku} - {selectedProduct.name}
-			</div>
+			</span>
 		);
 	};
 
 	return (
 		<div className="product-group" id={'group-' + group.slug}>
 			<div className="image-holder">
-				<div className="image">
-					<img
-						src={getProductImage()}
-						alt={group.type}
-						loading="lazy"
-					/>
-				</div>
+				<img src={getProductImage()} alt={group.type} loading="lazy" />
 			</div>
-			<div className="group-data">
-				<div className="group-title">
-					<h4 className="group-type">{group.type}</h4>
-					{selectedProduct !== 0 && <ProductDetails />}
-				</div>
-				{availableWidths && (
-					<Attribute
-						group={group.slug}
-						slug="width"
-						title="Width"
-						selected={group.slug + selectedWidth}
-						items={availableWidths}
-						action={setSelectedWidth}
-					/>
-				)}
-				{availableHeights && (
-					<Attribute
-						group={group.slug}
-						slug="height"
-						title="Height"
-						selected={group.slug + selectedHeight}
-						items={availableHeights}
-						action={setSelectedHeight}
-					/>
-				)}
+			<div className="group-title">
+				<h4 className="group-type">
+					{group.type} {selectedProduct !== 0 && <ProductDetails />}
+				</h4>
 			</div>
-			<div className="group-actions">
-				<div className="price">
-					<Price />
-				</div>
-				<div className="quantity">
-					{selectedProduct !== 0 && <Clear />}
-					<Select quantity={quantity} setQuantity={setQuantity} />
-				</div>
-				<AddToCartButton
-					loading={loading}
-					action={getSelectedProduct}
+			{availableWidths && (
+				<Attribute
+					group={group.slug}
+					slug="width"
+					title="Width"
+					selected={group.slug + selectedWidth}
+					items={availableWidths}
+					action={setSelectedWidth}
 				/>
+			)}
+			{availableHeights && (
+				<Attribute
+					group={group.slug}
+					slug="height"
+					title="Height"
+					selected={group.slug + selectedHeight}
+					items={availableHeights}
+					action={setSelectedHeight}
+				/>
+			)}
+			<div className="price">
+				<Price />
 			</div>
+			<div className="quantity">
+				{selectedProduct !== 0 && <Clear />}
+				<Select quantity={quantity} setQuantity={setQuantity} />
+			</div>
+			<AddToCartButton loading={loading} action={getSelectedProduct} />
 		</div>
 	);
 };

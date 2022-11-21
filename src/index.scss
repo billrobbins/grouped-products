@@ -9,135 +9,31 @@
 	}
 }
 
-.product-group {  display: grid;
-	grid-template-columns: 140px 50% 1fr;
-	grid-template-rows: auto;
-	gap: 20px 20px;
-	grid-auto-flow: row;
-	grid-template-areas:
-	  "image-holder group-data group-actions";
+.product-group {
+	display: grid; 
+	grid-template-columns: 100px 2.5fr 1fr; 
+	grid-template-rows: auto auto auto 1fr; 
+	gap: 0px 15px; 
+	grid-template-areas: 
+	  "image-holder title price"
+	  "image-holder width quantity"
+	  "image-holder height add-to-cart";
   }
-  
-  .image-holder {  display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	justify-content: center;
-	align-content: center;
-	justify-items: center;
-	align-items: center;
-	grid-template-areas:
-	  "image";
-	grid-area: image-holder;
+  .image-holder {
+	justify-self: center; 
+	align-self: center; 
+	grid-area: image-holder; 
   }
-  
-  .image {
-	justify-self: center;
-	align-self: center;
-	grid-area: image;
-  }
-  
-  .group-data {  display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto 1fr 1fr;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:
-	  "group-title"
-	  "width"
-	  "height";
-	grid-area: group-data;
-  }
-  
-  .group-title {  display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	justify-items: start;
-	grid-template-areas:
-	  ".";
-	grid-area: group-title;
-  }
-  
-  .width {  display: grid;
-	grid-template-columns: 60px auto;
-	grid-template-rows: auto;
-	gap: 0px 10px;
-	grid-auto-flow: row;
-	justify-items: start;
-	align-items: center;
-	grid-template-areas:
-	  "width-name widths";
-	grid-area: width;
-  }
-  
-  .width-name {
-	justify-self: start;
-	align-self: center;
-	grid-area: width-name;
-  }
-  
-  .widths {
-	justify-self: start;
-	align-self: center;
-	grid-area: widths;
-  }
-  
-  .height {  display: grid;
-	grid-template-columns: 60px auto;
-	grid-template-rows: auto;
-	gap: 0px 10px;
-	grid-auto-flow: row;
-	grid-template-areas:
-	  "height-name heights";
-	grid-area: height;
-  }
-  
-  .height-name {
-	justify-self: start;
-	align-self: center;
-	grid-area: height-name;
-  }
-  
-  .heights {
-	justify-self: start;
-	align-self: center;
-	grid-area: heights;
-  }
-  
-  .group-actions {  display: grid;
-	grid-template-columns: 1fr;
-	grid-template-rows: auto auto auto;
-	gap: 0px 0px;
-	grid-auto-flow: row;
-	grid-template-areas:
-	  "price"
-	  "quantity"
-	  "add-to-cart";
-	grid-area: group-actions;
-  }
-  
-  .price {
-	justify-self: end;
-	align-self: center;
-	grid-area: price;
-  }
-  
-  .quantity {
-	justify-self: end;
-	align-self: center;
-	grid-area: quantity;
-  }
-  
-  .add-to-cart {
-	justify-self: end;
-	align-self: center;
-	grid-area: add-to-cart;
-  }
-  
-  
+  .title { grid-area: title; }
+  .price { grid-area: price; 
+	justify-self: end; }
+  .width { grid-area: width; }
+  .quantity { grid-area: quantity; 
+	justify-self: end; }
+  .height { grid-area: height; }
+  .add-to-cart { grid-area: add-to-cart; 
+	justify-self: end; }
+
   /* Custom Styles */ 
   .product-group {
 	border-bottom: solid 2px #000;
@@ -160,16 +56,14 @@
 	background-color: #000;
   }
 
+  .product-group h2,
+  .product-group ul,
   .product-group p {
 	margin: 0;
+	display: inline-block;
   }
 
-  .product-group .group-data h2,
-  .product-group .group-data ul {
-	margin: 0;
-  }
-
-  .product-group .group-data li {
+  .product-group li {
 	display: inline-block;
 	padding-bottom: 0;
   }
@@ -233,7 +127,7 @@
   }
 
   .category-notification p {
-	margin-bottom: 0;
+	margin: 0;
 	padding: 1rem;
 	white-space: pre-wrap;
   }
@@ -251,5 +145,34 @@
 
 .product-details {
 	font-size: 14px;
+	font-weight: 400;
 	padding: 15px 0 0 0;
 }
+
+@media only screen and (max-width: 767px) {
+	.product-group {
+		display: grid; 
+		grid-template-columns: 1fr; 
+		grid-template-rows: auto auto auto auto auto auto auto; 
+		gap: 15px 15px; 
+		grid-template-areas: 
+		  "title"
+		  "image-holder"
+		  "width"
+		  "height"
+		  "price"
+		  "quantity"
+		  "add-to-cart";
+	  }
+	  .title,
+	  .image-holder,
+	  .width,
+	  .height,
+	  .price,
+	  .quantity,
+	  .add-to-cart {
+		justify-self: center; 
+		align-self: center;
+	  }
+}
+
