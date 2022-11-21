@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Grouped Products
- * Plugin URI:        https://github.com/billrobbins/
+ * Plugin URI:        https://github.com/billrobbins/grouped-products
  * Description:       Provides a clean way to group similar products in the store.
  * Version:           0.2
  * Requires at least: 5.2
@@ -41,7 +41,7 @@ function grouped_products_load_scripts(): void {
 	$script_url        = plugins_url( $script_path, __FILE__ );
 
 	wp_register_script(
-		'rapid-products',
+		'grouped-products',
 		$script_url,
 		$script_asset['dependencies'],
 		$script_asset['version'],
@@ -49,7 +49,7 @@ function grouped_products_load_scripts(): void {
 	);
 
 	wp_register_style(
-		'rapid-products',
+		'grouped-products',
 		plugins_url( '/build/index.css', __FILE__ ),
 		array(),
 		filemtime( dirname( __FILE__ ) . '/build/index.css' )
