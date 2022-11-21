@@ -1,3 +1,6 @@
+.wp-block-site-logo a, .wp-block-site-logo img {
+	border-radius: 0;
+}
 
 @media only screen and (min-width: 1024px) {
 	.tax-product_cat .aligncenter {
@@ -149,6 +152,7 @@
 	display: inline-block;
 	padding: 10px;
 	cursor: pointer;
+	margin-bottom: 0;
   }    
 
   .product-group input[type="radio"]:checked + label {
@@ -157,7 +161,7 @@
   }
 
   .product-group p {
-	margin-bottom: 0;
+	margin: 0;
   }
 
   .product-group .group-data h2,
@@ -206,6 +210,8 @@
 
   .product-group h4 {
 	margin: 0;
+	font-weight: 600;
+	font-size: 18px;
   }
 
   .product-group select {

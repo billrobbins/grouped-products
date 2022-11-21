@@ -188,8 +188,7 @@ class Class_Update_Product_Dimensions_By_Title {
 					$product->set_width( $width['dimension'] );
 					$product->save();
 					wc_get_logger()->info( 'width updated: ' . $product->get_name(), array( 'source' => 'Dimension Updated' ) );
-				} else {
-					wc_get_logger()->info( 'width not updated: ' . $product->get_name(), array( 'source' => 'Dimension Not Updated' ) );
+					continue;
 				}
 			}
 
@@ -198,8 +197,7 @@ class Class_Update_Product_Dimensions_By_Title {
 					$product->set_height( $height['dimension'] );
 					$product->save();
 					wc_get_logger()->info( 'height updated: ' . $product->get_name(), array( 'source' => 'Dimension Updated' ) );
-				} else {
-					wc_get_logger()->info( 'height not updated: ' . $product->get_name(), array( 'source' => 'Dimension Not Updated' ) );
+					continue;
 				}
 			}
 		}
