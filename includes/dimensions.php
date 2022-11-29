@@ -181,13 +181,52 @@ class Class_Update_Product_Dimensions_By_Title {
 			),
 		);
 
+		$lengths = array(
+			'36'   => array(
+				'pattern'   => '/ 36"D/i',
+				'dimension' => 36,
+			),
+			'33'   => array(
+				'pattern'   => '/ 33"D/i',
+				'dimension' => 33,
+			),
+			'24'   => array(
+				'pattern'   => '/ 24"D/i',
+				'dimension' => 24,
+			),
+			'21'   => array(
+				'pattern'   => '/ 21"H/i',
+				'dimension' => 21,
+			),
+			'20'   => array(
+				'pattern'   => '/ 20"D/i',
+				'dimension' => 20,
+			),
+			'15'   => array(
+				'pattern'   => '/ 15"D/i',
+				'dimension' => 15,
+			),
+			'12'   => array(
+				'pattern'   => '/ 12"D/i',
+				'dimension' => 12,
+			),
+			'11.5' => array(
+				'pattern'   => '/ 11.5"D/i',
+				'dimension' => 11.5,
+			),
+			'3/4'  => array(
+				'pattern'   => '/ 3/4″D /i',
+				'dimension' => .75,
+			),
+		);
+
 		foreach ( $products as $product ) {
 
 			foreach ( $widths as $width ) {
 				if ( self::matches_pattern( $width['pattern'], $product->get_name() ) ) {
 					$product->set_width( $width['dimension'] );
 					$product->save();
-					wc_get_logger()->info( 'width updated: ' . $product->get_name(), array( 'source' => 'Dimension Updated' ) );
+					wc_get_logger()->info( 'Width update: ' . $product->get_name(), array( 'source' => 'Dimension Updated' ) );
 					continue;
 				}
 			}
@@ -196,7 +235,16 @@ class Class_Update_Product_Dimensions_By_Title {
 				if ( self::matches_pattern( $height['pattern'], $product->get_name() ) ) {
 					$product->set_height( $height['dimension'] );
 					$product->save();
-					wc_get_logger()->info( 'height updated: ' . $product->get_name(), array( 'source' => 'Dimension Updated' ) );
+					wc_get_logger()->info( 'Height updated: ' . $product->get_name(), array( 'source' => 'Dimension Update' ) );
+					continue;
+				}
+			}
+
+			foreach ( $lengths as $length ) {
+				if ( self::matches_pattern( $length['pattern'], $product->get_name() ) ) {
+					$product->set_length( $length['dimension'] );
+					$product->save();
+					wc_get_logger()->info( 'Length updated: ' . $product->get_name(), array( 'source' => 'Dimension Update' ) );
 					continue;
 				}
 			}
