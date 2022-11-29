@@ -58,6 +58,9 @@ class Grouped_Products_WC_REST_Controller {
 
 		foreach ( $products as $product ) {
 			$image_url = wp_get_attachment_image_url( $product->get_image_id(), 'medium', false );
+			if ( ! $image_url ) {
+				$image_url = wc_placeholder_img_src();
+			}
 			$results[] = array(
 				'id'            => $product->get_id(),
 				'name'          => $product->get_name(),
