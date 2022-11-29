@@ -55,8 +55,8 @@ function grouped_products_load_scripts(): void {
 		filemtime( dirname( __FILE__ ) . '/build/index.css' )
 	);
 
-	wp_enqueue_script( 'rapid-products' );
-	wp_enqueue_style( 'rapid-products' );
+	wp_enqueue_script( 'grouped-products' );
+	wp_enqueue_style( 'grouped-products' );
 }
 
 add_action( 'wp_enqueue_scripts', 'grouped_products_load_scripts' );
