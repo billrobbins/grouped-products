@@ -9,6 +9,9 @@ import { addToCart } from '.././utilities/dataStore';
 import { AddToCartButton } from './addToCartButton';
 import { Attribute } from './groupAttribute';
 import { Select } from './select';
+import { Clear } from './clear';
+import { Price } from './price';
+import { ProductDetails } from './productDetails';
 
 // Todo: display error messages to customers.  Prompt to select height and width.
 export const Group = (props) => {
@@ -106,6 +109,7 @@ export const Group = (props) => {
 				}, 3500);
 			}
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [
 		selectedWidth,
 		selectedHeight,
@@ -115,36 +119,6 @@ export const Group = (props) => {
 		setShowNotify,
 	]);
 
-	const Clear = () => {
-		return (
-			<button className="clear-button" onClick={clearSelection}>
-				Clear
-			</button>
-		);
-	};
-
-	const Price = () => {
-		if (selectedProduct !== 0) {
-			return (
-				<h4>
-					<span className="sale-price">
-						${selectedProduct.regular_price}
-					</span>
-					${selectedProduct.price}
-				</h4>
-			);
-		}
-		return <h4>From ${group.products[0].price}</h4>;
-	};
-
-	const ProductDetails = () => {
-		return (
-			<span className="product-details">
-				{selectedProduct.sku} - {selectedProduct.name}
-			</span>
-		);
-	};
-
 	return (
 		<div className="product-group" id={'group-' + group.slug}>
 			<div className="image-holder">
@@ -152,7 +126,8 @@ export const Group = (props) => {
 			</div>
 			<div className="group-title">
 				<h4 className="group-type">
-					{group.type} {selectedProduct !== 0 && <ProductDetails />}
+					{group.type}
+					<ProductDetails selectedProduct={selectedProduct} />
 				</h4>
 			</div>
 			{availableWidths && (
@@ -175,11 +150,11 @@ export const Group = (props) => {
 					action={setSelectedHeight}
 				/>
 			)}
-			<div className="price">
-				<Price />
-			</div>
+			<Price selectedProduct={selectedProduct} group={group} />
 			<div className="quantity">
-				{selectedProduct !== 0 && <Clear />}
+				{selectedProduct !== 0 && (
+					<Clear clearSelection={clearSelection} />
+				)}
 				<Select quantity={quantity} setQuantity={setQuantity} />
 			</div>
 			<AddToCartButton loading={loading} action={getSelectedProduct} />
