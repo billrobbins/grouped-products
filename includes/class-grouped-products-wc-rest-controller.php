@@ -116,17 +116,6 @@ class Grouped_Products_WC_REST_Controller {
 
 		$cat = $request->get_param( 'cat' );
 
-		// Currently transients and caching are disabled in favor of the WP REST API Cache plugin.
-		// $transient = get_transient( "grouped_products_{$cat}" );
-
-		// if ( $transient ) {
-		// return new WP_REST_Response( $transient );
-		// }
-
-		// if ( true === $cached ) {
-		// return new WP_REST_Response( $cached );
-		// }
-
 		$terms = get_terms(
 			array(
 				'taxonomy'   => 'pa_cabinet-type',
@@ -138,8 +127,6 @@ class Grouped_Products_WC_REST_Controller {
 		foreach ( $terms as $term ) {
 			$groups[] = $this->get_products_in_groups( $cat, $term );
 		}
-
-		// set_transient( "grouped_products_${cat}", $groups, 30 * DAY_IN_SECONDS );
 
 		return new WP_REST_Response( $groups );
 	}
