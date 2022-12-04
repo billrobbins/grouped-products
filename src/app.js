@@ -11,41 +11,30 @@ import { Group } from './group/group';
 import { Notification } from './notifications/notification';
 
 export const App = () => {
-	const [cart, updateCart] = useState();
 	const [groupData, updateGroupData] = useState([]);
 	const [message, setMessage] = useState('');
 	const [showNotify, setShowNotify] = useState(false);
 
-	useEffect(() => {
-		const loadGroups = async () => {
+	const loadGroups = async () => {
+		try {
 			const response = await getGroups();
-			try {
-				updateGroupData(response);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		const loadCart = async () => {
+			updateGroupData(response);
+		} catch (e) {
+			setMessage('We hit a snag!\nError: ' + e.message);
+			setShowNotify(true);
+		}
+	};
+	const loadCart = async () => {
+		window.localStorage.removeItem('wp_nonce');
+		try {
 			const res = await getCart();
-			try {
-				window.localStorage.setItem(
-					'wc_nonce',
-					res.headers.get('Nonce')
-				);
-				window.localStorage.setItem(
-					'wc_nonce_time',
-					res.headers.get('Nonce-Timestamp')
-				);
-				updateCart(res);
-			} catch (error) {
-				console.log(error);
-			}
-		};
-		// const expireNonce =
-		// 	window.localStorage.getItem('wc_nonce_time') + 86400000;
-		// if (Date.now() > expireNonce) {
-		// 	loadCart();
-		// }
+			window.localStorage.setItem('wc_nonce', res.headers.get('Nonce'));
+		} catch (e) {
+			setMessage('We hit a snag!\nError: ' + e.message);
+			setShowNotify(true);
+		}
+	};
+	useEffect(() => {
 		loadCart();
 		loadGroups();
 	}, []);
@@ -59,6 +48,7 @@ export const App = () => {
 					group={group}
 					setMessage={setMessage}
 					setShowNotify={setShowNotify}
+					loadCart={loadCart}
 				/>
 			))}
 		</div>

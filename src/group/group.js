@@ -29,23 +29,35 @@ export const Group = (props) => {
 
 	/**
 	 * Fired by clicking the add to cart button.  It sets the loading state, sends the product id and quantity to the cart, removes the loading state and triggers a refresh of the mini cart.
-	 * It needs to give user feedback on errors like not picking width/height and so on.
 	 */
 	const getSelectedProduct = async () => {
 		if (typeof selectedProduct.id === 'undefined') {
+			setShowNotify(true);
 			setMessage('Please select a width and height');
 			return;
 		}
 		setLoading('loading');
-		await addToCart(selectedProduct.id, quantity);
-		setShowNotify(true);
-		setMessage('Added ' + selectedProduct.name);
-		setLoading('');
-		jQuery(document.body).trigger('wc_fragment_refresh');
-		clearSelection();
-		setTimeout(() => {
-			setShowNotify(false);
-		}, 2500);
+		try {
+			await addToCart(selectedProduct.id, quantity);
+			setMessage('Added ' + selectedProduct.name);
+			jQuery(document.body).trigger('wc_fragment_refresh');
+			clearSelection();
+			setShowNotify(true);
+		} catch (e) {
+			if (e.code === 'woocommerce_rest_invalid_nonce') {
+				window.localStorage.removeItem('wp_nonce');
+				props.loadCart();
+				getSelectedProduct();
+				return;
+			}
+			setShowNotify(true);
+			setMessage('We hit a snag!\nError: ' + e.message);
+		} finally {
+			setTimeout(() => {
+				setShowNotify(false);
+			}, 2500);
+			setLoading('');
+		}
 	};
 
 	const getProductImage = () => {
